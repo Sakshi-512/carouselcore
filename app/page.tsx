@@ -66,6 +66,20 @@ export default function Home() {
           </p>
         </div>
 
+        {/* Top Banner */}
+        <div className="mb-8 bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center">
+          <p className="text-white text-lg">
+            🚀 Pro version launching next week! 
+            <a 
+              href="https://tally.so/r/zxD9lk" 
+              target="_blank"
+              className="underline ml-2 font-semibold hover:text-cyan-300"
+            >
+              Join waitlist →
+            </a>
+          </p>
+        </div>
+
         {/* Input Form */}
         <div className="bg-white rounded-2xl shadow-2xl p-8 mb-8">
           <div className="space-y-6">
