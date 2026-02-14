@@ -217,7 +217,9 @@ export default function CarouselRenderer({ slides }: Props) {
         {slides.map((slide, index) => (
           <div key={slide.number} className="relative">
             <canvas
-              ref={(el) => (canvasRefs.current[index] = el)}
+              ref={(el) => {
+                canvasRefs.current[index] = el;
+              }}
               width={1080}
               height={1080}
               className="w-full border-4 border-white rounded-xl shadow-2xl"
