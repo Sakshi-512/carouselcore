@@ -1,12 +1,20 @@
 import OpenAI from 'openai';
 import { NextResponse } from 'next/server';
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY
-});
-
 export async function POST(request: Request) {
   try {
+    const apiKey = process.env.OPENAI_API_KEY;
+    if (!apiKey) {
+      return NextResponse.json(
+        { error: 'OpenAI API key is not configured' },
+        { status: 500 }
+      );
+    }
+
+    const openai = new OpenAI({
+      apiKey: apiKey
+    });
+
     const { topic, keyPoints } = await request.json();
     
     const prompt = `Create a 6-slide LinkedIn carousel about: "${topic}"
@@ -82,11 +90,11 @@ Return ONLY valid JSON, no markdown formatting.`;
 
     const content = completion.choices[0]?.message?.content;
     if (!content) {
-      throw new Error('o content received from OpenAI');
+      throw new Error('No content received from OpenAI');
     }
-    
-    const result = JSON.parse(content);
 
+    const result = JSON.parse(content);
+    
     return NextResponse.json(result);
     
   } catch (error: any) {
