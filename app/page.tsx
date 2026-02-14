@@ -110,7 +110,14 @@ export default function Home() {
                   Generating...
                 </span>
               ) : (
-                'Generate Carousel ✨'
+                <span className="flex items-center justify-center gap-2">
+                  Generate Carousel
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 0L14.09 8.26L22 10L14.09 11.74L12 20L9.91 11.74L2 10L9.91 8.26L12 0Z" opacity="0.9"/>
+                    <path d="M19 3L19.5 5.5L22 6L19.5 6.5L19 9L18.5 6.5L16 6L18.5 5.5L19 3Z" opacity="0.7"/>
+                    <path d="M5 15L5.3 16.3L6.6 16.6L5.3 16.9L5 18.2L4.7 16.9L3.4 16.6L4.7 16.3L5 15Z" opacity="0.8"/>
+                  </svg>
+                </span>
               )}
             </button>
           </div>
