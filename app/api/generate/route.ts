@@ -80,8 +80,13 @@ Return ONLY valid JSON, no markdown formatting.`;
       temperature: 0.8
     });
 
-    const result = JSON.parse(completion.choices[0].message.content);
+    const content = completion.choices[0]?.message?.content;
+    if (!content) {
+      throw new Error('o content received from OpenAI');
+    }
     
+    const result = JSON.parse(content);
+
     return NextResponse.json(result);
     
   } catch (error: any) {
