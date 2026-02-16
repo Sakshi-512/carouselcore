@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import CarouselRenderer from './components/CarouselRenderer';
+import AuthModal from './components/AuthModal';
 
 interface Slide {
   number: number;
@@ -15,6 +16,7 @@ export default function Home() {
   const [slides, setSlides] = useState<Slide[] | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [showAuthModal, setShowAuthModal] = useState(false);
 
   const generateCarousel = async () => {
     if (!topic.trim()) {
@@ -55,15 +57,23 @@ export default function Home() {
     <main className="min-h-screen bg-gradient-to-br from-cyan-500 to-slate-800 p-8">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
-        <div className="mb-12">
-          <h1 className="text-6xl font-bold mb-4">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-cyan-200 to-cyan-500 drop-shadow-lg">
-              CarouselCore
-            </span>
-          </h1>
-          <p className="text-2xl text-white/90">
-            AI-powered carousel maker
-          </p>
+        <div className="flex justify-between items-center mb-8">
+          <div>
+            <h1 className="text-6xl font-bold mb-4">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-cyan-200 to-cyan-500 drop-shadow-lg">
+                CarouselCore
+              </span>
+            </h1>
+            <p className="text-2xl text-white/90">
+              AI-powered carousel maker
+            </p>
+          </div>
+          <button
+            onClick={() => setShowAuthModal(true)}
+            className="bg-white text-cyan-600 px-6 py-2 rounded-lg font-bold hover:bg-gray-100"
+          >
+            Sign In
+          </button>
         </div>
 
         {/* Top Banner */}
@@ -154,6 +164,11 @@ export default function Home() {
           <CarouselRenderer slides={slides} />
         )}
       </div>
+
+      <AuthModal 
+        isOpen={showAuthModal} 
+        onClose={() => setShowAuthModal(false)} 
+      />
     </main>
   );
 }
