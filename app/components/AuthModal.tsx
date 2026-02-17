@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
 
 interface AuthModalProps {
@@ -9,6 +10,7 @@ interface AuthModalProps {
 }
 
 export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
+  const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -36,6 +38,9 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
         });
         
         if (error) throw error;
+        
+        // Redirect to dashboard after successful login
+        router.push('/dashboard');
         onClose();
       }
     } catch (error: any) {
